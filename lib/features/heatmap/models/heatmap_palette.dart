@@ -52,7 +52,7 @@ class HeatmapTheme extends ThemeExtension<HeatmapTheme> {
 
   static const light = HeatmapTheme(
     palette: HeatmapPalette(
-      base: Color(0xFFCDD5D7),
+      base: Color(0xFFB2B2B2),
       level1: AppPalette.heatLevel1,
       level2: AppPalette.heatLevel2,
       level3: AppPalette.heatLevel3,

@@ -5,9 +5,8 @@ import 'package:intl/intl.dart';
 import '../../../core/data/database.dart';
 import '../../../core/providers/database_provider.dart';
 import '../../common/providers/shared_prefs_provider.dart';
-import '../../common/models/measurement_system.dart';
-import '../../common/models/unit_converter.dart';
 import '../../user/providers/user_providers.dart';
+import '../services/set_display.dart';
 
 final _workoutLogsProvider = StreamProvider.autoDispose((ref) {
   final userId = ref.watch(currentUserIdProvider);
@@ -109,7 +108,7 @@ class _WorkoutDetails extends ConsumerWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 8, bottom: 6),
                   child: Text(
-                    sets.map((s) => _formatSet(s, ms)).join(' · '),
+                    sets.map((s) => formatLoggedSet(s, ms)).join(' · '),
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ),
@@ -121,22 +120,4 @@ class _WorkoutDetails extends ConsumerWidget {
     );
   }
 
-  String _formatSet(SetLogRow set, MeasurementSystem ms) {
-    if (set.weight != null && set.reps != null) {
-      final weight = UnitConverter.weightToUserMs(set.weight!, ms);
-      final display = weight == weight.roundToDouble()
-          ? weight.toInt().toString()
-          : weight.toStringAsFixed(1);
-      return '$display×${set.reps}';
-    }
-    if (set.distance != null) {
-      final distance = UnitConverter.distanceToUserMs(set.distance!, ms);
-      final minutes = (set.durationSeconds ?? 0) ~/ 60;
-      return '${distance.toStringAsFixed(1)}${ms.distanceUnit}'
-          '${minutes > 0 ? ' / ${minutes}m' : ''}';
-    }
-    if (set.reps != null) return '×${set.reps}';
-    if (set.durationSeconds != null) return '${set.durationSeconds}s';
-    return '—';
-  }
 }

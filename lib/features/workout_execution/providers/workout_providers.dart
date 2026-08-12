@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/data/dao/history_dao.dart';
 import '../../../core/data/database.dart';
 import '../../../core/providers/database_provider.dart';
 import '../../common/providers/shared_prefs_provider.dart';
@@ -30,4 +31,16 @@ final activeDraftsProvider =
 final workoutChangeTickProvider = StreamProvider<int>((ref) {
   final userId = ref.watch(currentUserIdProvider);
   return ref.read(databaseProvider).historyDao.watchWorkoutChanges(userId);
+});
+
+/// Latest completed exercise performances — the home "Recent exercises"
+/// card. Re-runs off the change-tick.
+final recentPerformancesProvider =
+    FutureProvider.autoDispose<List<RecentPerformance>>((ref) {
+  ref.watch(workoutChangeTickProvider);
+  final userId = ref.watch(currentUserIdProvider);
+  return ref
+      .read(databaseProvider)
+      .historyDao
+      .getRecentPerformances(userId);
 });

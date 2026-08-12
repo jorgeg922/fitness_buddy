@@ -2,15 +2,71 @@ import 'package:drift/drift.dart';
 
 import '../database.dart';
 import '../tables/exercise_performance_log_table.dart';
+import '../tables/exercise_table.dart';
 import '../tables/set_log_table.dart';
+import '../tables/user_exercise_table.dart';
 import '../tables/workout_log_table.dart';
 
 part 'history_dao.g.dart';
 
-@DriftAccessor(
-    tables: [WorkoutLogTable, ExercisePerformanceLogTable, SetLogTable])
+/// One recent performance with its display name and logged sets — feeds the
+/// home "Recent exercises" card.
+class RecentPerformance {
+  RecentPerformance({
+    required this.userExerciseId,
+    required this.exerciseName,
+    required this.performedAt,
+    required this.sets,
+  });
+
+  final String userExerciseId;
+  final String exerciseName;
+  final int performedAt;
+  final List<SetLogRow> sets;
+}
+
+@DriftAccessor(tables: [
+  WorkoutLogTable,
+  ExercisePerformanceLogTable,
+  SetLogTable,
+  UserExerciseTable,
+  ExerciseTable,
+])
 class HistoryDao extends DatabaseAccessor<AppDatabase> with _$HistoryDaoMixin {
   HistoryDao(super.db);
+
+  /// Latest performed exercises across all sessions, newest first, with
+  /// their sets resolved.
+  Future<List<RecentPerformance>> getRecentPerformances(String userId,
+      {int limit = 8}) async {
+    final rows = await (select(exercisePerformanceLogTable).join([
+      innerJoin(
+          userExerciseTable,
+          userExerciseTable.id
+              .equalsExp(exercisePerformanceLogTable.userExerciseId)),
+      innerJoin(exerciseTable,
+          exerciseTable.id.equalsExp(userExerciseTable.exerciseId)),
+    ])
+          ..where(exercisePerformanceLogTable.userId.equals(userId))
+          ..orderBy([
+            OrderingTerm.desc(exercisePerformanceLogTable.performedAt),
+            OrderingTerm.desc(exercisePerformanceLogTable.id),
+          ])
+          ..limit(limit))
+        .get();
+
+    final result = <RecentPerformance>[];
+    for (final row in rows) {
+      final performance = row.readTable(exercisePerformanceLogTable);
+      result.add(RecentPerformance(
+        userExerciseId: performance.userExerciseId,
+        exerciseName: row.readTable(exerciseTable).name,
+        performedAt: performance.performedAt,
+        sets: await getSetsForPerformance(performance.id),
+      ));
+    }
+    return result;
+  }
 
   /// The change-tick: expensive stats FutureProviders watch this count and
   /// re-run after every finished workout instead of holding live joins open.
