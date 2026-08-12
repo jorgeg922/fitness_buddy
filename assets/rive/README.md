@@ -16,7 +16,7 @@ built-in muscle-group breakdown with the same data.
    assets/rive/human_anatomy_advanced_v3.0.riv
    ```
 
-3. Rebuild the app (`flutter run`). The interactive heatmap activates automatically —
+3. Rebuild the app (`flutter run`). The interactive heatmap activates automatically -
    no code changes needed.
 
 ## What you get
