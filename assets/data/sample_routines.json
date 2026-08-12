@@ -1,0 +1,74 @@
+{
+  "sample_routines": [
+    {
+      "id": 1,
+      "name": "Upper Body Push"
+    },
+    {
+      "id": 2,
+      "name": "Lower Body"
+    }
+  ],
+  "sample_routine_exercises":[
+    {
+      "routine_id": 1,
+      "exercise_id": "8880e1c0-391c-4b70-b362-b9e966d337fd",
+      "position": 0
+    },
+    {
+      "routine_id": 1,
+      "exercise_id": "47766f70-fd23-4c0c-bf39-49cafccba4aa",
+      "position": 1
+    },
+    {
+      "routine_id": 1,
+      "exercise_id": "1023800a-df79-4e12-8ad7-deec328334b2",
+      "position": 2
+    },
+    {
+      "routine_id": 1,
+      "exercise_id": "a171efc2-2c10-4b11-b0fb-8adffab3a4b1",
+      "position": 3
+    },
+    {
+      "routine_id": 1,
+      "exercise_id": "d451090d-dbe9-48c4-aff1-f4a8a3df6d98",
+      "position": 4
+    },
+    {
+      "routine_id": 1,
+      "exercise_id": "64cbcf4e-2a27-47a6-a94b-5ba7af9b569d",
+      "position": 5
+    },
+    {
+      "routine_id": 1,
+      "exercise_id": "3e7a4eb5-2a4b-4e52-8a2b-f097c828f72c",
+      "position": 6
+    },
+    {
+      "routine_id": 2,
+      "exercise_id": "39e4e9a2-6509-4108-bb24-8d75386aa569",
+      "position": 0
+    },
+    {
+      "routine_id": 2,
+      "exercise_id": "c07c9dac-4fbc-41e6-9564-8ec59031e5c1",
+      "position": 1
+    },
+    {
+      "routine_id": 2,
+      "exercise_id": "25813ac7-7089-4d27-8343-23194ef0ad52",
+      "position": 2
+    },
+    {
+      "routine_id": 2,
+      "exercise_id": "22be85ec-6f1c-437c-944f-a441e37fc431",
+      "position": 3
+    },
+    {
+      "routine_id": 2,
+      "exercise_id": "5e15e74b-3304-48f8-b94d-0057831b5dbf",
+      "position": 4
+    }
+  ]
+}
