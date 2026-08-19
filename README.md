@@ -6,7 +6,7 @@ interactive muscle heatmap.**
 Log workouts, build routines, track personal records — and *see* your
 training as an anatomically accurate body heatmap that lights up the muscles
 you've worked, powered by a
-[Rive muscle heatmap asset](https://fitnessvisuals.com) with 29 individually
+[Rive muscle heatmap asset](https://www.fitnessvisuals.com/?utm_source=github&utm_medium=referral&utm_campaign=fitness-buddy) with 29 individually
 addressable muscles, tap-to-drill-down interactivity, and male/female ×
 front/back views.
 
@@ -36,7 +36,7 @@ front/back views.
 ## The muscle heatmap
 
 The heatmap is driven by the **Human Anatomy Advanced** Rive asset from
-[Fitness Visuals](https://fitnessvisuals.com). It's a commercial asset and
+[Fitness Visuals](https://www.fitnessvisuals.com/?utm_source=github&utm_medium=referral&utm_campaign=fitness-buddy). It's a commercial asset and
 is **not included in this repository** - but the app fully works without it:
 every heatmap surface falls back to the same data rendered as muscle-group
 heat bars.
@@ -44,7 +44,7 @@ heat bars.
 To enable the interactive figure:
 
 1. Get `human_anatomy_advanced_v3.0.riv` from
-   [fitnessvisuals.com](https://fitnessvisuals.com)
+   [fitnessvisuals.com](https://www.fitnessvisuals.com/?utm_source=github&utm_medium=referral&utm_campaign=fitness-buddy)
 2. Drop it into `assets/rive/`
 3. Rebuild - it activates automatically
 
@@ -106,4 +106,4 @@ clean and `flutter test` green, please.
 ## License
 
 [MIT](LICENSE). The Rive muscle heatmap asset is a commercial product of
-[Fitness Visuals](https://fitnessvisuals.com) and is licensed separately.
+[Fitness Visuals](https://www.fitnessvisuals.com/?utm_source=github&utm_medium=referral&utm_campaign=fitness-buddy) and is licensed separately.
